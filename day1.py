@@ -5,3 +5,4 @@ for i in linesInFile:
     inputFile.append(format(i.strip()))
 
 
+print(inputFile)
