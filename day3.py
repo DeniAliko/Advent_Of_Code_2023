@@ -134,7 +134,7 @@ for num in uniqueNums:
     for pos in numCoords.keys():
         if numCoords[pos] == num:
             baseLocs.append([pos[1], pos[0]])
-    print(baseLocs)
+    # print(baseLocs)
     for pos in baseLocs:
         if len(num) == 3:
             longPos = tuple([(pos[1], pos[1]+2), pos[0]])
@@ -146,7 +146,7 @@ for num in uniqueNums:
             longPos = tuple([(pos[1], pos[1]+0), pos[0]])
             locations[longPos] = num
 
-print(locations)
+# print(locations)
 products = []
 def checkAround(tuple):
     x = tuple[0]
@@ -188,7 +188,7 @@ for y in range(0, len(organizedInput)):
         if current == "*":
             checkAround((x, y))
 
-print(products)
+# print(products)
 sum = 0
 for product in products:
     sum += product
