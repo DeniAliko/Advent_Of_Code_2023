@@ -1,9 +1,12 @@
 import math
+import time
+
 file = open("day8.txt")
 inputFile = []
 linesInFile = file.readlines()
 for i in linesInFile:
     inputFile.append(format(i.strip()))
+startTime = time.time()
 
 instructions = "LRLRLRLRRLRRRLRLRLRRRLLRRLRRLRRLLRRLRRLRLRRRLRRLLRRLRRRLRRLRRRLRRRLLLRRLLRLLRRRLLRRLRLLRLLRRRLLRRLRRLRRRLRRLRLRRLRRLRLLRLRRRLRLRRLRLLRRLRRRLRRLRLRRLLLRRLRRRLRRRLRRLRRRLRLRRLRRLRRRLRRLRRLRRLRRLRRRLLRRRLLLRRRLRRLRRRLLRRRLRRLRRLLLLLRRRLRLRRLRRLLRRLRRLRLRLRRRLRRRLRRLLLRRRR"
 # instructions = "LR"
@@ -56,3 +59,6 @@ for start in starts:
             break
 
 print(math.lcm(cycles[0], cycles[1], cycles[2], cycles[3], cycles[4], cycles[5]))
+
+endTime = time.time()
+print(endTime-startTime)
