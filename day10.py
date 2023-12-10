@@ -37,28 +37,46 @@ def walk():
     elif currentPipe == "F":
         if direction == "N":
             direction = "E"
+            current[0] += 1
         elif direction == "W":
             direction = "S"
+            current[1] += 1
     elif currentPipe == "7":
         if direction == "N":
             direction = "W"
+            current[0] -= 1
         elif direction == "E":
             direction = "S"
+            current[1] += 1
     elif currentPipe == "L":
         if direction == "S":
             direction = "E"
+            current[0] += 1
         elif direction == "W":
             direction = "N"
+            current[1] -= 1
     elif currentPipe == "J":
         if direction == "S":
             direction = "W"
+            current[0] -= 1
         elif direction == "E":
             direction = "N"
+            current[1] -= 1
 
     if currentPipe != ".":
         pipeCount += 1
     return
 
+pipePartCoords = []
+
 while coords[tuple(current)] != "S":
+# for i in range(20):
     walk()
-    print(pipeCount)
+    pipePartCoords.append(current)
+    # print(current)
+    # print(direction)
+
+# print(pipeCount)
+print("P1:", (pipeCount + 1)/2)
+
+print(pipePartCoords)
