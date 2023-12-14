@@ -100,10 +100,29 @@ def getPossible(rowList):
 
 validCount = 0
 for line in organizedInput:
-    print(line)
-    print(organizedInput.index(line))
+    # print(line)
+    # print(organizedInput.index(line))
     for possibility in getPossible(line):
         if validCheck(possibility):
             validCount += 1
 
-print(validCount)
+print("p1:", validCount)
+
+def check(rowList):
+    row = [char for char in rowList[0]]
+    digits = rowList[1:][1:]
+    focusDigit = rowList[1:][0]
+    outputSum = 0
+
+    for i in range(0, len(row)):
+        foundPatch = True
+        for diff in range(0, focusDigit):
+            if row[i+diff] != "?":
+                foundPatch = False
+        
+        if foundPatch:
+            outputSum += check([row[i+1:]] + digits)
+
+    return outputSum
+
+print(check(["???.###", 1,1,3]))
