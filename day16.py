@@ -129,17 +129,17 @@ while not beams.empty():
         visited.add((focusBeam.coords[0], focusBeam.coords[1]))
 
     # print(len(visited))
-    vis = ["x0123456789"]
-    for i in range(0, len(inputFile)):
-        cacheString = str(i)
-        for j in range(0, len(inputFile[i])):
-            if (j, i) in visited:
-                cacheString += "#"
-            else:
-                cacheString += "."
-        vis.append(cacheString)
+        vis = ["x0123456789"]
+        for i in range(0, len(inputFile)):
+            cacheString = str(i)
+            for j in range(0, len(inputFile[i])):
+                if (j, i) in visited:
+                    cacheString += "#"
+                else:
+                    cacheString += "."
+            vis.append(cacheString)
 
-    printList(vis)
+        printList(vis)
 
 # 2333 too low
 # 2394 too low
