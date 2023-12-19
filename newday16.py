@@ -54,6 +54,9 @@ def move(beam):
                 coords[1] -= 1
                 direction = "R"
                 beams.append([coords.copy(), "L"])
+            else:
+                coords[1] -= 1
+        visited.append(tuple(coords))
 
     elif direction == "D":
         if coords[1] == len(inputFile) - 1:
@@ -71,6 +74,9 @@ def move(beam):
                 coords[1] += 1
                 direction = "L"
                 beams.append([coords.copy(), "R"])
+            else:
+                coords[1] += 1
+        visited.append(tuple(coords))
 
     elif direction == "R":
         if coords[0] == len(inputFile[0]) - 1:
@@ -88,6 +94,9 @@ def move(beam):
                 coords[0] += 1
                 direction = "U"
                 beams.append([coords.copy(), "D"])
+            else:
+                coords[0] += 1
+        visited.append(tuple(coords))
 
     elif direction == "L":
         if coords[0] == 0:
@@ -105,11 +114,25 @@ def move(beam):
                 coords[0] -= 1
                 direction = "D"
                 beams.append([coords.copy(), "U"])
+            else:
+                coords[0] -= 1
+        visited.append(tuple(coords))
 
-visited = set()
-while True:
+visited = [(0, 0)]
+for k in range(100):
     for beam in beams:
-        visited.add(tuple(beam[0]))
         print(len(visited))
         print(visited)
         move(beam)
+
+vis = ["x0123456789"]
+for y in range(0, len(inputFile)):
+    cacheStr = str(y)
+    for x in range(0, len(inputFile[y])):
+        if (x, y) in visited:
+            cacheStr += "#"
+        else:
+            cacheStr += "."
+    vis.append(cacheStr)
+
+printList(vis)    
