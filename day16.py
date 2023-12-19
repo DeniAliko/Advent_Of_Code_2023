@@ -57,7 +57,7 @@ class Beam:
                 elif [self.coords[0], self.coords[1]-1] in hSplit:
                     self.coords[1] -= 1
                     self.direction = "E"
-                    beams.put(Beam(self.coords, "W", False))
+                    beams.put(Beam(self.coords.copy(), "W", False))
                 else:
                     self.coords[1] -= 1
 
@@ -76,7 +76,7 @@ class Beam:
                 elif [self.coords[0], self.coords[1]+1] in hSplit:
                     self.coords[1] += 1
                     self.direction = "W"
-                    beams.put(Beam(self.coords, "E", False))
+                    beams.put(Beam(self.coords.copy(), "E", False))
                 else:
                     self.coords[1] += 1
                 
@@ -93,7 +93,7 @@ class Beam:
                 elif [self.coords[0] + 1, self.coords[1]] in vSplit:
                     self.coords[0] += 1
                     self.direction = "N"
-                    beams.put(Beam(self.coords, "S", False))
+                    beams.put(Beam(self.coords.copy(), "S", False))
                 elif [self.coords[0] + 1, self.coords[1]] in hSplit:
                     self.coords[0] += 1
                 else:
@@ -112,7 +112,7 @@ class Beam:
                 elif [self.coords[0] - 1, self.coords[1]] in vSplit:
                     self.coords[0] -= 1
                     self.direction = "S"
-                    beams.put(Beam(self.coords, "N", False))
+                    beams.put(Beam(self.coords.copy(), "N", False))
                 elif [self.coords[0] - 1, self.coords[1]] in hSplit:
                     self.coords[0] -= 1
                 else:
@@ -120,31 +120,26 @@ class Beam:
 
 beams.put(Beam([0, 0], "E", False))
 visited = set({(0, 0)})
+prevVisitedLen = 0
 
+duplicateVisitedNodes = 0
 while not beams.empty():
     focusBeam = beams.get()
     while not focusBeam.stop:
         focusBeam.move()
         # print(focusBeam.coords)
+        prevVisitedLen = len(visited)
         visited.add((focusBeam.coords[0], focusBeam.coords[1]))
+        print(len(visited))
+        if duplicateVisitedNodes == 20:
+            focusBeam.stop = True
+            duplicateVisitedNodes = 0
+            continue
+        if len(visited) == prevVisitedLen:
+            duplicateVisitedNodes += 1
+        
 
     # print(len(visited))
-        vis = ["x0123456789"]
-        for i in range(0, len(inputFile)):
-            cacheString = str(i)
-            for j in range(0, len(inputFile[i])):
-                if (j, i) in visited:
-                    cacheString += "#"
-                else:
-                    cacheString += "."
-            vis.append(cacheString)
-
-        printList(vis)
-
-# 2333 too low
-# 2394 too low
-# 2510 too low
-# not 2588
 vis = ["x0123456789"]
 for i in range(0, len(inputFile)):
     cacheString = str(i)
@@ -155,5 +150,23 @@ for i in range(0, len(inputFile)):
             cacheString += "."
     vis.append(cacheString)
 
-printList(vis)
+# printList(vis)
+
+# 2333 too low
+# 2394 too low
+# 2510 too low
+# not 2588
+# not 4745
+# not 6155
+vis = ["x0123456789"]
+for i in range(0, len(inputFile)):
+    cacheString = str(i)
+    for j in range(0, len(inputFile[i])):
+        if (j, i) in visited:
+            cacheString += "#"
+        else:
+            cacheString += "."
+    vis.append(cacheString)
+
+# printList(vis)
 print(len(visited))
